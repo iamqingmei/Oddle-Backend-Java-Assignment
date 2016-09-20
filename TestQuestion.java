@@ -73,43 +73,40 @@ public class TestQuestion {
 		display.put(7,"Saturday");
 		display.put(1,"Sunday");
 		
-		sevenDays.add(new DayHours(Calendar.MONDAY));
-		sevenDays.add(new DayHours(Calendar.TUESDAY));
-		sevenDays.add(new DayHours(Calendar.WEDNESDAY));
-		sevenDays.add(new DayHours(Calendar.THURSDAY));
-		sevenDays.add(new DayHours(Calendar.FRIDAY));
-		sevenDays.add(new DayHours(Calendar.SATURDAY));
-		sevenDays.add(new DayHours(Calendar.SUNDAY));
+		sevenDays.add(new DayHours(Calendar.SUNDAY)); //sevenDays.get(0)
+		sevenDays.add(new DayHours(Calendar.MONDAY)); //1
+		sevenDays.add(new DayHours(Calendar.TUESDAY));//2
+		sevenDays.add(new DayHours(Calendar.WEDNESDAY)); //3
+		sevenDays.add(new DayHours(Calendar.THURSDAY)); //4
+		sevenDays.add(new DayHours(Calendar.FRIDAY)); //5
+		sevenDays.add(new DayHours(Calendar.SATURDAY)); //6
+		
 
 		for(ShiftHour sh:shiftHours){
-			OpeningHours theShift = new OpeningHours(sh.getStartHour(),sh.getEndHour());
 			for (int i:sh.getDaysInWeek()){
-				sevenDays.get(i-2).addOpeningHours(theShift);
+				sevenDays.get(i-1).addOpeningHours(sh.getStartHour(),sh.getEndHour());
 			}
 		}
+		// sevenDays.get(0).printOpeningHours();
+		// sevenDays.get(0).addOpeningHours(12,24);
+		// sevenDays.get(0).printOpeningHours();
+
+		
 		DayHours sDay = new DayHours(-1);
 		DayHours eDay = sevenDays.get(0);
 		System.out.print("Monday");
-		for (DayHours dh:sevenDays){
-			dh.mergeOpeningHours();	
-
-					
-			if (!SameOpeningHours(eDay.getOpeningHours(),dh.getOpeningHours())){
-								
+		for (int i=1;i<7;i++){
+			DayHours dh = sevenDays.get(i);
+			if (!SameOpeningHours(eDay.getOpeningHours(),dh.getOpeningHours())){								
 				if (eDay.getDayInWeek() != sDay.getDayInWeek()){
 					System.out.print(" - " + display.get(eDay.getDayInWeek()));					
 				}
-				System.out.print("\n");
-				if (eDay.getOpeningHours() == null){
-					System.out.println("Closed");
-				}
+				// System.out.print("\n");
+				// if (i==6){
+				// 	dh.printOpeningHours();
+				// }
 				else{
-					for (OpeningHours s:eDay.getOpeningHours()){
-						printTime(s.getStartHour());
-						System.out.print(" to ");
-						printTime(s.getEndHour());
-						System.out.print("\n");
-					}
+					eDay.printOpeningHours();
 				}
 				System.out.print("\n");				
 				System.out.print(display.get(dh.getDayInWeek()));
@@ -121,18 +118,7 @@ public class TestQuestion {
 			}	
 		}
 		System.out.print("\n");
-		if (sevenDays.get(6).getOpeningHours().size() == 0){
-			System.out.println("Closed");
-		}
-		else{
-			System.out.println("here?");
-			for (OpeningHours s:sevenDays.get(6).getOpeningHours()){
-				printTime(s.getStartHour());
-				System.out.print(" to ");
-				printTime(s.getEndHour());
-				System.out.print("\n");
-			}
-		}
+		
 		
 		
 		
@@ -140,34 +126,16 @@ public class TestQuestion {
 		shiftHours = ShiftHour.initializeShiftHoursSetTwo();
 	}
 	
-	private static boolean SameOpeningHours(ArrayList<OpeningHours> a, ArrayList<OpeningHours> b){
-		if (a.size() != b.size()){
-			return false;
-		}
-		for (OpeningHours oh:a){
-			if (!oh.contains(b)){
+	private static boolean SameOpeningHours(boolean[] a, boolean[] b){
+		for (int i=0;i<24;i++){
+			if (a[i]!=b[i]){
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	private static void printTime(int n){
-		int pm = n/12;
-		int time = n%12;
-		if (time ==0){
-			System.out.print("12");
-		}
-		else{
-			System.out.print(time);
-		}
-		if (pm == 1){
-			System.out.print("PM");
-		}
-		else{
-			System.out.print("AM");
-		}
-	}
+	
 }
 
 
