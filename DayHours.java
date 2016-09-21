@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class DayHours {
 	private int dayInWeek; //1-7
-	private boolean[] openingHours = new boolean[24]; //0-23, represents 1-24 o'clock
+	private boolean[] openingHours = new boolean[24]; //0-23, represents 24 hours in a day
 	public DayHours(int day){
 		this.dayInWeek = day;
 		for (int i=0;i<24;i++){
@@ -13,15 +13,19 @@ public class DayHours {
 	public int getDayInWeek(){
 		return this.dayInWeek;
 	}
+
+	public boolean[] getOpeningHours(){
+		return this.openingHours;
+	}
+
+	//set the open hour as true
 	public void addOpeningHours(int s, int e){
 		for (int i=s;i<e+1;i++){
 			openingHours[i-1] = true;
 		}
 	}
-	public boolean[] getOpeningHours(){
-		return this.openingHours;
-	}
 
+	//print out the Opening Hours
 	public void printOpeningHours(){
 		int s = -1;
 		int e = -1;
@@ -60,8 +64,8 @@ public class DayHours {
 		}
 	}
 
+	//print out the int hour number as 11PM format 
 	private static void printTime(int n){
-		int pm = n/12;
 		int time = n%12;
 		if (time ==0){
 			System.out.print("12");
@@ -69,7 +73,7 @@ public class DayHours {
 		else{
 			System.out.print(time);
 		}
-		if (pm == 1){
+		if (n/12 == 1){
 			System.out.print("PM");
 		}
 		else{
