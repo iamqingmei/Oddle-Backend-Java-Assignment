@@ -92,35 +92,56 @@ public class TestQuestion {
 		// sevenDays.get(0).printOpeningHours();
 
 		
-		DayHours sDay = new DayHours(-1);
-		DayHours eDay = sevenDays.get(0);
+		// DayHours sDay = new DayHours(-1);
+		// DayHours eDay = sevenDays.get(1);
+		// System.out.print("Monday");
+		// int[] list = {1,2,3,4,5,6,0};
+		// for (int i:list){
+		// 	DayHours dh = sevenDays.get(i);
+		// 	if (!SameOpeningHours(eDay.getOpeningHours(),dh.getOpeningHours())){								
+		// 		if (eDay.getDayInWeek() != sDay.getDayInWeek()){
+		// 			System.out.print(" - " + display.get(eDay.getDayInWeek()));					
+		// 		}
+		// 		System.out.print("\n");
+		// 		if (i==0){
+		// 			dh.printOpeningHours();
+		// 		}
+		// 		else{
+		// 			eDay.printOpeningHours();
+		// 		}
+		// 		System.out.print("\n");				
+		// 		System.out.print(display.get(dh.getDayInWeek()));
+		// 		sDay = dh;	
+		// 		eDay = dh;
+		// 	}
+		// 	else{
+		// 		eDay = dh;	
+		// 	}	
+		// }
+		// System.out.print("\n");
+		DayHours sDay = sevenDays.get(1);
+		DayHours eDay = sevenDays.get(1);
 		System.out.print("Monday");
-		for (int i=1;i<7;i++){
+		int[] list = {2,3,4,5,6,0};
+		for (int i:list){
 			DayHours dh = sevenDays.get(i);
-			if (!SameOpeningHours(eDay.getOpeningHours(),dh.getOpeningHours())){								
+			if (!SameOpeningHours(eDay.getOpeningHours(),dh.getOpeningHours())){
 				if (eDay.getDayInWeek() != sDay.getDayInWeek()){
 					System.out.print(" - " + display.get(eDay.getDayInWeek()));					
 				}
-				// System.out.print("\n");
-				// if (i==6){
-				// 	dh.printOpeningHours();
-				// }
-				else{
-					eDay.printOpeningHours();
-				}
-				System.out.print("\n");				
-				System.out.print(display.get(dh.getDayInWeek()));
-				sDay = dh;	
+				System.out.print("\n");	
+				eDay.printOpeningHours();
+				System.out.print("\n");	
+				System.out.print(display.get(dh.getDayInWeek()));								
+				sDay = dh;
 				eDay = dh;
 			}
 			else{
-				eDay = dh;	
-			}	
+				eDay = dh;
+			}
 		}
 		System.out.print("\n");
-		
-		
-		
+		sevenDays.get(0).printOpeningHours();
 		
 		//Additional set of data for verification
 		shiftHours = ShiftHour.initializeShiftHoursSetTwo();
@@ -134,7 +155,6 @@ public class TestQuestion {
 		}
 		return true;
 	}
-	
 	
 }
 
